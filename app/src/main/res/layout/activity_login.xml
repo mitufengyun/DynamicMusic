@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity">
+
+    <!--Toolbar-->
+    <include layout="@layout/tool_bar"/>
+
+    <!--内容部分
+    layout_behavior:用来控制内容区域,显示在toolbar下方-->
+    <LinearLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_margin"
+        android:orientation="vertical"
+        >
+
+        <!--用户名输入框
+        这里不能是使用maxLength限制最长字符数，因为这里用户名既可能是手机号，也可能是邮箱
+        如果只输入手机号，就可以设置maxLength = "11"
+        -->
+        <EditText
+            android:id="@+id/et_username"
+            style="@style/EditText"
+            android:hint="@string/enter_username"
+            android:inputType="textEmailAddress"/>
+
+        <!--密码输入框-->
+        <EditText
+            android:id="@+id/et_password"
+            style="@style/EditText"
+            android:hint="@string/enter_password"
+            android:inputType="textPassword"/>
+
+        <!--登录按钮-->
+        <Button
+            android:id="@+id/bt_login"
+            android:background="@drawable/selector_color_primary"
+            android:textColor="@drawable/selector_text_color_primary_reverse"
+            android:text="@string/login"
+            android:layout_marginTop="@dimen/padding_large"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"/>
+
+        <!--忘记密码按钮-->
+        <!--style="?android:attr/borderlessButtonStyle" 去除边框-->
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/bt_forget_password"
+            android:background="@color/transparent"
+            android:textColor="@color/light_grey"
+            android:text="@string/forget_password"
+            android:layout_marginTop="@dimen/padding_large"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

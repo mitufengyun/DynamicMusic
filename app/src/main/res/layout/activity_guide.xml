@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+<!--    &lt;!&ndash;占位控件&ndash;&gt;-->
+<!--    <FrameLayout-->
+<!--        android:id="@+id/container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1"/>-->
+
+    <!--左右滚动控件-->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!--指示器-->
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/ci"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/guide_indicator_height"
+        app:ci_drawable="@drawable/shape_circle_color_primary"
+        app:ci_drawable_unselected="@drawable/shape_circle_light_grey"
+        />
+
+    <!--按钮容器-->
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100">
+
+        <!--占位控件-->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <!--登录注册按钮-->
+        <Button
+            android:id="@+id/bt_login_or_register"
+            android:background="@drawable/selector_color_primary"
+            android:text="@string/login_or_register"
+            android:textColor="@drawable/selector_text_color_primary_reverse"
+            android:layout_width="@dimen/button_width_large"
+            android:layout_height="@dimen/button_height"/>
+
+        <!--占位控件-->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+
+        <!--立即体验按钮-->
+        <Button
+            android:id="@+id/bt_enter"
+            android:background="@drawable/selector_color_primary_reverse"
+            android:text="@string/experience_now"
+            android:textColor="@drawable/selector_text_color_primary"
+            android:layout_width="@dimen/button_width_large"
+            android:layout_height="@dimen/button_height"/>
+
+        <!--占位控件-->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

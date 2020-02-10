@@ -4,7 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
@@ -18,10 +18,35 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url "https://jitpack.io" }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+//扩展配置
+//相当于定义常量
+//只是我们这里定义的常量是在gradle文件中引用
+//而不是在java文件中引用
+ext {
+    //最小版本
+    minSdkVersion = 19
+
+    //编译版本
+    //一定要更改为稳定版本
+    compileSdkVersion = 29
+
+    //编译工具版本
+    buildToolsVersion = "29.0.2"
+
+    //目标版本
+    targetSdkVersion = 29
+
+    //版本号
+    versionCode = 100
+
+    //版本名称
+    versionName = "1.0.0"
 }

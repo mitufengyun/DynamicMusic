@@ -1,15 +1,29 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    //编译版本
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    //编译工具版本
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
+        //应用唯一标识
         applicationId "com.ixuea.courses.mymusic"
-        minSdkVersion 15
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        //最小版本
+        minSdkVersion rootProject.ext.minSdkVersion
+        //目标版本
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        //版本号
+        versionCode rootProject.ext.versionCode
+        //版本名称
+        versionName rootProject.ext.versionName
+        //测试相关
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //开启MultiDex
+        multiDexEnabled true
+
+        //渠道相关
+        flavorDimensions "versionCode"
     }
     buildTypes {
         release {
@@ -17,13 +31,125 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    //将源码兼容版本设置为Java 8
+    //因为ButterKnife需要Java 8
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //配置不同的环境
+    productFlavors {
+        //开发环境
+        dev {
+            //API端点
+            buildConfigField('String', "ENDPOINT", '"http://dev-my-cloud-music-api-rails.ixuea.com/"')
+
+            //资源端点
+            buildConfigField 'String', 'RESOURCE_ENDPOINT', '"http://dev-courses-misuc.ixuea.com/%s"'
+
+            dimension = minSdkVersion
+        }
+
+        //正式环境
+        prod {
+            //API端点
+            buildConfigField 'String', 'ENDPOINT', '"http://api-courses-misuc.ixuea.com/"'
+
+            //资源端点
+            buildConfigField 'String', 'RESOURCE_ENDPOINT', '"http://courses-misuc.ixuea.com/%s"'
+
+            dimension = minSdkVersion
+        }
+    }
 }
 
 dependencies {
+
+    //添加所有libs目录里面的jar
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+
+    //添加appcompat
+    implementation('androidx.appcompat:appcompat:1.1.0')
+
+    //material design依赖
+    //AppBarLayout在这里面
+    implementation 'com.google.android.material:material:1.1.0'
+
+    //引用constraintlayout依赖
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
+
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+//    testImplementation 'junit:junit:4.12'
+    //Android测试依赖
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+
+    //material design依赖
+    //AppBarLayout在这里面
+    implementation 'com.google.android.material:material:1.1.0'
+
+
+    //圆形指示器
+    //https://github.com/ongakuer/CircleIndicator
+    implementation 'me.relex:circleindicator:2.1.4'
+
+    //ButterKnife
+    //提供通过注解的方式找控件
+    //https://github.com/JakeWharton/butterknife
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+
+    //apache common lang3工具包
+    //提供了StringUtils等这样的类
+    //http://commons.apache.org/proper/commons-lang/
+    implementation 'org.apache.commons:commons-lang3:3.9'
+
+
+    //toast工具类
+    //https://github.com/GrenderG/Toasty
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
+
+    //MultiDex
+    implementation "androidx.multidex:multidex:2.0.1"
+
+    //请求网络相关
+    //okhttp
+    //https://github.com/square/okhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
+
+    //用来打印okhttp请求日志
+    //当然也可以自定义
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+
+    //retrofit
+    //https://github.com/square/retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+
+    //使用gson解析json
+    //https://github.com/google/gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    //适配retrofit使用gson解析
+    //版本要和retrofit一样
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+
+    //适配retrofit支持rxjava
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
+
+    //使用了Android响应式编程
+    //RxJava和RxAndroid区别？
+    //简单来说：就是RxAndroid在RxJava的基础上
+    //优化了一些功能
+    //增强了Android特有的功能
+    //https://github.com/ReactiveX/RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    testImplementation 'org.testng:testng:6.9.6'
+    //end 请求网络相关
+
 }
