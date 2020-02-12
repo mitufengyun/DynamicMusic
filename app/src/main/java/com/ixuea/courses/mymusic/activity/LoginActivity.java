@@ -129,6 +129,7 @@ public class LoginActivity extends BaseTitleActivity {
                             ToastUtil.errorShortToast(R.string.error_network_unknown);
                         }
 
+
                     }
 
                     @Override
